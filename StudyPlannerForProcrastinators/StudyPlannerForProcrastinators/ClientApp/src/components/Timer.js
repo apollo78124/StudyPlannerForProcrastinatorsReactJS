@@ -36,13 +36,11 @@ class Timer extends Component {
         this.intervalID = setInterval(
             () => this.tick(),
             1000
-        ); this.intervalID = setInterval(
-            () => this.tick(),
-            1000
         );
     }
 
     pauseTimer() {
+        clearInterval(this.intervalID);
     }
 
     stopTimer() {
