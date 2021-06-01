@@ -1,0 +1,68 @@
+﻿import React, { Component } from 'react';
+import { Table, Button } from 'reactstrap';
+import ToDoCreationModal from './form/ToDoCreationModal';
+import { TODO_API_URL } from '../constants';
+class ToDoTable extends Component {
+    deleteItem = id => {
+        
+    }
+    render() {
+        const items = this.props.items;
+        return <Table striped>
+            <thead>
+                <tr>
+                    <th>ToDo List:</th>
+                    
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Goal</th>
+                    <th>TimeSpent</th>
+                    <th>IterationsSpent</th>
+                    <th>Comment</th>
+                    <th><ToDoCreationModal isNew={true} addToDoToState={this.props.addToDoToState} /></th>
+                </tr>
+            </thead>
+            <tbody>
+                {!items || items.length <= 0 ?
+                    <tr>
+                        <td colSpan="6" align="center"><b>Nothing to do yet</b></td>
+                    </tr>
+                    : items.map(item => (
+                        <tr key={item.id}>
+                            <th scope="row">
+                                {item.id}
+                            </th>
+                            <td>
+                                {item.title}
+                            </td>
+                            <td>
+                                {item.goal}
+                            </td>
+                            <td>
+                                {item.timeSpent}
+                            </td>
+                            <td>
+                                {item.iterationsSpent}
+                            </td>
+                            <td>
+                                {item.comment}
+                            </td>
+                            <td align="center">
+                                <div>
+                                    <ToDoCreationModal
+                                        isNew = { false}
+                                        todo = { item }
+                                        updateToDoIntoState = { this.props.updateState } />
+                  &nbsp;&nbsp;&nbsp;
+                  <Button color="danger" onClick={() => this.deleteItem(item.id)}>X</Button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+            </tbody>
+        </Table>;
+    }
+}
+export default ToDoTable;
