@@ -44,10 +44,15 @@ class Timer extends Component {
     }
 
     stopTimer() {
-        
+        this.setState({
+            second: 0,
+            minute: 25
+        });
+        clearInterval(this.intervalID);
     }
 
     endOfIteration() {
+        this.stopTimer();
     }
 
     render() {
