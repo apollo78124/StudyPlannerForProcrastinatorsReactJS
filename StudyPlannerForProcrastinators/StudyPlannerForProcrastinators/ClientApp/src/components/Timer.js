@@ -18,21 +18,41 @@ class Timer extends Component {
     }
 
     tick() {
-        
+        this.setState({
+            second: --this.state.second
+        });
+        if (this.state.second < 0) {
+            this.setState({
+                second: 59,
+                minute: --this.state.minute
+            });
+            if (this.state.minute < 0) {
+                this.endOfIteration();
+            }
+        }
     }
 
     startTimer() {
-        
+        this.intervalID = setInterval(
+            () => this.tick(),
+            1000
+        );
     }
 
     pauseTimer() {
+        clearInterval(this.intervalID);
     }
 
     stopTimer() {
-        
+        this.setState({
+            second: 0,
+            minute: 25
+        });
+        clearInterval(this.intervalID);
     }
 
     endOfIteration() {
+        this.stopTimer();
     }
 
     render() {
