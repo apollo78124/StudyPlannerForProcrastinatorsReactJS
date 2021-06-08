@@ -21,30 +21,35 @@ class StudyTimer extends Component {
         this.setState({ items: data });
     }
     addToDoToState = todo => {
+        this.setState(previous => ({
+            items: [...previous.items, todo]
+        }));
     }
     updateState = (id) => {
         this.getItens();
     }
     deleteItemFromState = id => {
+        const updated = this.state.items.filter(item => item.id !== id);
+        this.setState({ items: updated })
     }
     render() {
         return <Container>
-        <Timer />
-        <Container style={{ paddingTop: "50px" }}>
-            <Row>
-                <Col>
-                    <ToDoTable
+            <Timer />
+            <Container style={{ paddingTop: "50px" }}>
+                <Row>
+                    <Col>
+                        <ToDoTable
                             items={this.state.items}
                             updateState={this.updateState}
                             addToDoToState={this.addToDoToState}
                             deleteItemFromState={this.deleteItemFromState} />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <ToDoCreationModal isNew={true} addToDoToState={this.addToDoToState} />
-                </Col>
-            </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <ToDoCreationModal isNew={true} addToDoToState={this.addToDoToState} />
+                    </Col>
+                </Row>
             </Container>
         </Container >;
     }
