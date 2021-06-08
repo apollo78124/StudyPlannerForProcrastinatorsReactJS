@@ -17,13 +17,61 @@ class ToDoCreationForm extends React.Component {
         }
     }
     onChange = e => {
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     onChangeNumber = e => {
+        this.setState({ [e.target.name]: parseInt(e.target.value) })
+    }
+
+    submitNew = e => {
+        e.preventDefault();
+        var data = {
+            title: this.state.title,
+            goal: this.state.goal,
+            timeSpent: this.state.timeSpent,
+            iterationsSpent: this.state.iterationsSpent,
+            comment: this.state.comment
+        };
+        const dataInJson = JSON.stringify(data);
+        fetch(`${TODO_API_URL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: dataInJson
+        })
+            .then(res => res.json())
+            .then(todo => {
+                this.props.addToDoToState(todo);
+                this.props.toggle();
+            })
+            .catch(err => console.log(err));
+    }
+    submitEdit = e => {
+        e.preventDefault();
+        fetch(`${TODO_API_URL}/${this.state.id}`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: this.state.title,
+                goal: this.state.goal,
+                timeSpent: this.state.timeSpent,
+                iterationsSpent: this.state.iterationsSpent,
+                comment: this.state.comment
+            })
+        })
+            .then(() => {
+                this.props.toggle();
+                this.props.updateToDoIntoState(this.state.id);
+            })
+            .catch(err => console.log(err));
     }
 
     render() {
-        return <Form>
+        return <Form onSubmit={this.props.todo ? this.submitEdit : this.submitNew}>
             <FormGroup>
                 <Label for="title">Title:</Label>
                 <Input type="text" name="title" onChange={this.onChange} value={this.state.title === '' ? '' : this.state.title} />
