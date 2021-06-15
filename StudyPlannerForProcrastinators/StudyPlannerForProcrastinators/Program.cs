@@ -16,7 +16,7 @@ namespace StudyPlannerForProcrastinators
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
+            /**
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -31,7 +31,7 @@ namespace StudyPlannerForProcrastinators
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
-
+            */
             host.Run();
         }
 
