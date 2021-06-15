@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudyPlannerForProcrastinators.Models;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,28 @@ namespace StudyPlannerForProcrastinators.Controllers
     public class TodosController : ControllerBase
     {
         private readonly MockDbService dBService;
+        private readonly StudyPlannerDbContext _context;
+        /**
         public TodosController()
         {
             this.dBService = new MockDbService();
         }
+        */
+
+        public TodosController(StudyPlannerDbContext context)
+        {
+            this.dBService = new MockDbService();
+            _context = context;
+        }
+
         // GET /todos
         [HttpGet]
         public IEnumerable<ToDo> Get()
         {
-            return dBService.GetAllToDo().ToArray();
+            IEnumerable<ToDo> todoList = _context.ToDos.ToArray();
+            return todoList;
         }
+        
         // GET /todos
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
@@ -32,7 +45,7 @@ namespace StudyPlannerForProcrastinators.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ToDo todo)
         {
-            return CreatedAtAction("Get", new { id = todo.Id }, dBService.CreateToDo(todo));
+            return CreatedAtAction("Get", new { id = todo.ID }, dBService.CreateToDo(todo));
         }
         // PUT /todos/5
         [HttpPut("{id}")]

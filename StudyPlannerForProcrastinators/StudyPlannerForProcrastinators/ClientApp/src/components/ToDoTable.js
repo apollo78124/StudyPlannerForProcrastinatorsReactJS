@@ -4,7 +4,19 @@ import ToDoCreationModal from './form/ToDoCreationModal';
 import { TODO_API_URL } from '../constants';
 class ToDoTable extends Component {
     deleteItem = id => {
-        
+        let confirmDeletion = window.confirm('Do you really wish to delete it?');
+        if (confirmDeletion) {
+            fetch(`${TODO_API_URL}/${id}`, {
+                method: 'delete',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => {
+                    this.props.deleteItemFromState(id);
+                })
+                .catch(err => console.log(err));
+        }
     }
     render() {
         const items = this.props.items;
@@ -12,7 +24,7 @@ class ToDoTable extends Component {
             <thead>
                 <tr>
                     <th>ToDo List:</th>
-                    
+
                 </tr>
                 <tr>
                     <th>#</th>
@@ -52,9 +64,9 @@ class ToDoTable extends Component {
                             <td align="center">
                                 <div>
                                     <ToDoCreationModal
-                                        isNew = { false}
-                                        todo = { item }
-                                        updateToDoIntoState = { this.props.updateState } />
+                                        isNew={false}
+                                        todo={item}
+                                        updateToDoIntoState={this.props.updateState} />
                   &nbsp;&nbsp;&nbsp;
                   <Button color="danger" onClick={() => this.deleteItem(item.id)}>X</Button>
                                 </div>
