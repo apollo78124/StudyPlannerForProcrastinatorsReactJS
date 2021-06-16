@@ -39,26 +39,53 @@ namespace StudyPlannerForProcrastinators.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(dBService.GetToDoById(id));
+            return Ok(_context.ToDos.FindAsync(id));
         }
         // POST /todos
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ToDo todo)
         {
-            return CreatedAtAction("Get", new { id = todo.ID }, dBService.CreateToDo(todo));
+            
+            todo.StudentID = 3;
+            _context.ToDos.Add(todo);
+            _context.SaveChanges();
+            return CreatedAtAction("Get", todo);
         }
         // PUT /todos/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] ToDo todo)
+        public IActionResult Put(int id, [FromBody] ToDo todo)
         {
-            dBService.UpdateToDo(id, todo);
-            return NoContent();
+            
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid model");
+
+            var existingToDo = _context.ToDos.Where(s => s.ID == id)
+                                                    .FirstOrDefault<ToDo>();
+
+            if (existingToDo != null)
+            {
+                existingToDo.Comment = todo.Comment;
+                existingToDo.Goal = todo.Goal;
+                existingToDo.IterationsSpent = todo.IterationsSpent;
+                existingToDo.TimeSpent = todo.TimeSpent;
+                existingToDo.Title = todo.Title;
+
+                _context.SaveChanges();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
         // DELETE /todos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            dBService.DeleteToDo(id);
+            var todo = _context.ToDos.Find(id);
+            _context.Remove(todo);
+            _context.SaveChanges();
             return NoContent();
         }
         public override NoContentResult NoContent()
