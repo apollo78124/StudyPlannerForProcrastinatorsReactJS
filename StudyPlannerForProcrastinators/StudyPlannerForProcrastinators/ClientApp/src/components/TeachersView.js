@@ -1,13 +1,13 @@
 ﻿import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import ToDoTable from './ToDoTable';
+import StudentProgressTable from './StudentProgressTable';
 import Timer from './Timer';
 import ToDoCreationModal from './form/ToDoCreationModal';
 import { TODO_API_URL } from '../constants';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-class StudyTimer extends Component {
+class TeachersView extends Component {
     state = {
         items: [],
         iteration: 0,
@@ -77,17 +77,10 @@ class StudyTimer extends Component {
     }
 
     render() {
-        return <Container>
-            <Timer
-                updateIterationAndTime={this.updateIterationAndTime}
-            />
-            <br />
-            <p className="text-dark">One Iteration is 25 minutes. Ideally, one ToDo should be done within 4 to 6 iterations.</p>
-            <p className="text-dark"><b>Current Iteration: {this.state.iteration}</b><br />of ToDo {this.state.todoId}: <b>{this.state.title}</b><br />Goal: {this.state.goal}</p>
-            <Container style={{ paddingTop: "20px" }}>
+        return <Container style={{ paddingTop: "20px" }}>
                 <Row>
                     <Col>
-                        <ToDoTable
+                    <StudentProgressTable
                             items={this.state.items}
                             updateState={this.updateState}
                             addToDoToState={this.addToDoToState}
@@ -100,9 +93,8 @@ class StudyTimer extends Component {
                         <ToDoCreationModal isNew={true} addToDoToState={this.addToDoToState} />
                     </Col>
                 </Row>
-            </Container>
-        </Container >;
+            </Container>;
     }
 }
 //<RegistrationModal isNew={true} addUserToState={this.addUserToState} />
-export default StudyTimer;
+export default TeachersView;

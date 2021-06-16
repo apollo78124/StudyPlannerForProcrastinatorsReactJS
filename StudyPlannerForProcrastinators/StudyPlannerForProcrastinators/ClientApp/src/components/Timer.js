@@ -56,8 +56,8 @@ class Timer extends Component {
     resetTimer() {
         clearInterval(this.intervalID);
         this.setState({
-            second: 3,
-            minute: 0
+            second: 0,
+            minute: 25
         });
     }
 
@@ -67,6 +67,7 @@ class Timer extends Component {
             minute: 0
         });
         clearInterval(this.intervalID);
+        this.props.updateIterationAndTime();
     }
 
     render() {
