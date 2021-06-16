@@ -45,14 +45,26 @@ class Timer extends Component {
 
     stopTimer() {
         this.setState({
-            second: 0,
-            minute: 25
+            second: 3,
+            minute: 0
+        });
+        clearInterval(this.intervalID);
+    }
+
+    resetTimer() {
+        this.setState({
+            second: 3,
+            minute: 0
         });
         clearInterval(this.intervalID);
     }
 
     endOfIteration() {
-        this.stopTimer();
+        this.setState({
+            second: 0,
+            minute: 0
+        });
+        clearInterval(this.intervalID);
     }
 
     render() {
@@ -77,6 +89,7 @@ class Timer extends Component {
                 <Col>
                     <Button color="primary" onClick={() => this.startTimer()}>Start Iteration</Button>
                     <Button title="Pause the timer when you want to take a piss." color="danger" onClick={() => this.pauseTimer()}>Pause</Button>
+                    <Button title="Reset timer" color="secondary" onClick={() => this.resetTimer()}>Reset</Button>
                 </Col>
                 <Col>
                     <Button title="When you Chicken Out, current iteration stops forever. Time spent in this iteration doesn't get added to the TimeSpent column." color="warning" onClick={() => this.stopTimer()}>Chicken Out</Button>
