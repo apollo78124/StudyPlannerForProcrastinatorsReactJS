@@ -2,7 +2,13 @@
 import { Table, Button } from 'reactstrap';
 import ToDoCreationModal from './form/ToDoCreationModal';
 import { TODO_API_URL } from '../constants';
+
 class ToDoTable extends Component {
+
+    state = {
+        title: ""
+    }
+
     deleteItem = id => {
         let confirmDeletion = window.confirm('Do you really wish to delete it?');
         if (confirmDeletion) {
@@ -18,16 +24,18 @@ class ToDoTable extends Component {
                 .catch(err => console.log(err));
         }
     }
+
     render() {
         const items = this.props.items;
         return <Table striped>
             <thead>
                 <tr>
-                    <th>ToDo List:</th>
+                    <th colSpan="2">To Do List: </th>
 
                 </tr>
                 <tr>
                     <th>#</th>
+                    <th>OnIt</th>
                     <th>Title</th>
                     <th>Goal</th>
                     <th>TimeSpent</th>
@@ -43,9 +51,16 @@ class ToDoTable extends Component {
                     </tr>
                     : items.map(item => (
                         <tr key={item.id}>
-                            <th scope="row">
+                            <td>
                                 {item.id}
-                            </th>
+                            </td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    ref="complete"
+                                    onChange={(param) => this.props.handleOnIt(item)}
+                                />
+                            </td>
                             <td>
                                 {item.title}
                             </td>
