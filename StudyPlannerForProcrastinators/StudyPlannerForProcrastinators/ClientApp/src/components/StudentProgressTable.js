@@ -3,7 +3,7 @@ import { Table, Button } from 'reactstrap';
 import ToDoCreationModal from './form/ToDoCreationModal';
 import { TODO_API_URL } from '../constants';
 
-class ToDoTable extends Component {
+class StudentProgressTable extends Component {
 
     state = {
         title: ""
@@ -30,7 +30,7 @@ class ToDoTable extends Component {
         return <Table striped>
             <thead>
                 <tr>
-                    <th colSpan="2">To Do List: </th>
+                    <th colSpan="2">Overview Of Students' Progress</th>
 
                 </tr>
                 <tr>
@@ -92,4 +92,4 @@ class ToDoTable extends Component {
         </Table>;
     }
 }
-export default ToDoTable;
+export default StudentProgressTable;

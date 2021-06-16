@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import StudyTimer from './components/StudyTimer';
+import TeachersView from './components/TeachersView';
 
 import './custom.css'
 
@@ -17,6 +18,7 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
             <Route path='/counter' component={Counter} />
             <Route path='/study-timer' component={StudyTimer} />
+            <Route path='/teachers' component={TeachersView} />
         <Route path='/fetch-data' component={FetchData} />
       </Layout>
     );

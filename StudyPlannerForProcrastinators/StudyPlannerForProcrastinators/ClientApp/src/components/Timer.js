@@ -9,7 +9,9 @@ class Timer extends Component {
             minute: 25,
             second: 0,
             timerOn: false,
-            iteration: 1
+            iteration: 1,
+            taskTitle: "",
+            taskGoal: "",
         };
     }
 
@@ -44,15 +46,28 @@ class Timer extends Component {
     }
 
     stopTimer() {
+        clearInterval(this.intervalID);
+        this.setState({
+            second: 0,
+            minute: 0
+        });
+    }
+
+    resetTimer() {
+        clearInterval(this.intervalID);
         this.setState({
             second: 0,
             minute: 25
         });
-        clearInterval(this.intervalID);
     }
 
     endOfIteration() {
-        this.stopTimer();
+        this.setState({
+            second: 0,
+            minute: 0
+        });
+        clearInterval(this.intervalID);
+        this.props.updateIterationAndTime();
     }
 
     render() {
@@ -64,19 +79,13 @@ class Timer extends Component {
                     </h1>
                     <br />
                 </Col>
-                <Col>
-                    <p className="text-dark"><br /><b>Iteration 1</b><br />of ToDo 2: <b>React Assignment 2</b><br />Goal: Make CRUD table for users</p>
-                </Col>
-                <Col>
-                </Col>
-                <Col>
-                </Col>
             </Row>
             
             <Row>
                 <Col>
                     <Button color="primary" onClick={() => this.startTimer()}>Start Iteration</Button>
                     <Button title="Pause the timer when you want to take a piss." color="danger" onClick={() => this.pauseTimer()}>Pause</Button>
+                    <Button title="Reset timer" color="secondary" onClick={() => this.resetTimer()}>Reset</Button>
                 </Col>
                 <Col>
                     <Button title="When you Chicken Out, current iteration stops forever. Time spent in this iteration doesn't get added to the TimeSpent column." color="warning" onClick={() => this.stopTimer()}>Chicken Out</Button>
@@ -84,12 +93,6 @@ class Timer extends Component {
                 <Col>
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    <p className="text-dark">One Iteration is 25 minutes. Ideally, one ToDo should be done within 4 to 6 iterations.</p>
-                </Col>
-            </Row>
-            
         </Fragment>;
     }
 }
