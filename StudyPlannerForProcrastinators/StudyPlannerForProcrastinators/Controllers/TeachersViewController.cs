@@ -10,7 +10,7 @@ namespace StudyPlannerForProcrastinators.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TodosController : ControllerBase
+    public class TeachersViewController : ControllerBase
     {
         private readonly MockDbService dBService;
         private readonly StudyPlannerDbContext _context;
@@ -21,55 +21,52 @@ namespace StudyPlannerForProcrastinators.Controllers
         }
         */
 
-        public TodosController(StudyPlannerDbContext context)
+        public TeachersViewController(StudyPlannerDbContext context)
         {
             this.dBService = new MockDbService();
             _context = context;
         }
 
-        // GET /todos
+        // GET /teachersView
         [HttpGet]
-        public IEnumerable<ToDo> Get()
+        public IEnumerable<Student> Get()
         {
-            IEnumerable<ToDo> todoList = _context.ToDos.ToArray();
-            return todoList;
+            IEnumerable<Student> studentList = _context.Students.ToArray();
+            return studentList;
         }
-        
-        // GET /todos
+
+        // GET /teachersView
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(_context.ToDos.FindAsync(id));
+            return Ok(_context.Students.FindAsync(id));
         }
-        // POST /todos
+        // POST /teachersView
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ToDo todo)
+        public async Task<IActionResult> Post([FromBody] Student student)
         {
-            
-            todo.StudentID = 3;
-            _context.ToDos.Add(todo);
+
+            student.TeacherID = 1;
+            _context.Students.Add(student);
             _context.SaveChanges();
-            return CreatedAtAction("Get", todo);
+            return CreatedAtAction("Get", student);
         }
-        // PUT /todos/5
+        // PUT /teachersView/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ToDo todo)
+        public IActionResult Put(int id, [FromBody] Student student)
         {
-            
+
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
 
-            var existingToDo = _context.ToDos.Where(s => s.ID == id)
-                                                    .FirstOrDefault<ToDo>();
+            var existingStudent = _context.Students.Where(s => s.ID == id)
+                                                    .FirstOrDefault<Student>();
 
-            if (existingToDo != null)
+            if (existingStudent != null)
             {
-                existingToDo.Comment = todo.Comment;
-                existingToDo.Goal = todo.Goal;
-                existingToDo.IterationsSpent = todo.IterationsSpent;
-                existingToDo.TimeSpent = todo.TimeSpent;
-                existingToDo.Title = todo.Title;
-
+                existingStudent.LastName = student.LastName;
+                existingStudent.FirstMidName = student.FirstMidName;
+                existingStudent.TeacherID = 1;
                 _context.SaveChanges();
             }
             else
@@ -83,8 +80,8 @@ namespace StudyPlannerForProcrastinators.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var todo = _context.ToDos.Find(id);
-            _context.Remove(todo);
+            var student = _context.Students.Find(id);
+            _context.Remove(student);
             _context.SaveChanges();
             return NoContent();
         }

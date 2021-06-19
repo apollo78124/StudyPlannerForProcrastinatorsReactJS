@@ -1,9 +1,9 @@
 ﻿import React, { Component } from 'react';
 import { Table, Button } from 'reactstrap';
 import ToDoCreationModal from './form/ToDoCreationModal';
-import { TODO_API_URL } from '../constants';
+import { TCV_API_URL } from '../constants';
 
-class ToDoTable extends Component {
+class StudentProgressTable extends Component {
 
     state = {
         title: ""
@@ -12,7 +12,7 @@ class ToDoTable extends Component {
     deleteItem = id => {
         let confirmDeletion = window.confirm('Do you really wish to delete it?');
         if (confirmDeletion) {
-            fetch(`${TODO_API_URL}/${id}`, {
+            fetch(`${TCV_API_URL}/${id}`, {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,18 +30,15 @@ class ToDoTable extends Component {
         return <Table striped>
             <thead>
                 <tr>
-                    <th colSpan="2">To Do List: </th>
+                    <th colSpan="2">Overview Of Students' Progress</th>
 
                 </tr>
                 <tr>
-                    <th>#</th>
-                    <th>OnIt</th>
-                    <th>Title</th>
-                    <th>Goal</th>
-                    <th>TimeSpent</th>
+                    <th>StudentID</th>
+                    <th>LastName</th>
+                    <th>FirstMidName</th>
+                    <th>TimeSpent (Min)</th>
                     <th>IterationsSpent</th>
-                    <th>Comment</th>
-                    <th><ToDoCreationModal isNew={true} addToDoToState={this.props.addToDoToState} /></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,32 +52,22 @@ class ToDoTable extends Component {
                                 {item.id}
                             </td>
                             <td>
-                                <input
-                                    type="checkbox"
-                                    ref="complete"
-                                    onChange={(param) => this.props.handleOnIt(item)}
-                                />
+                                {item.lastName}
                             </td>
                             <td>
-                                {item.title}
+                                {item.firstMidName}
                             </td>
                             <td>
-                                {item.goal}
+                                1000.00
                             </td>
                             <td>
-                                {item.timeSpent}
-                            </td>
-                            <td>
-                                {item.iterationsSpent}
-                            </td>
-                            <td>
-                                {item.comment}
+                                40
                             </td>
                             <td align="center">
                                 <div>
                                     <ToDoCreationModal
                                         isNew={false}
-                                        todo={item}
+                                        student={item}
                                         updateToDoIntoState={this.props.updateState} />
                   &nbsp;&nbsp;&nbsp;
                   <Button color="danger" onClick={() => this.deleteItem(item.id)}>X</Button>
@@ -92,4 +79,4 @@ class ToDoTable extends Component {
         </Table>;
     }
 }
-export default ToDoTable;
+export default StudentProgressTable;

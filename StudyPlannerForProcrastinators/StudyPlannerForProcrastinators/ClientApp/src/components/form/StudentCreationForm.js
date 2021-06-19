@@ -1,19 +1,19 @@
 ﻿import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { TODO_API_URL } from '../../constants';
-class ToDoCreationForm extends React.Component {
+import { TCV_API_URL } from '../../constants';
+class StudentCreationForm extends React.Component {
     state = {
         id: 0,
-        title: '',
-        goal: '',
-        timeSpent: 0,
-        iterationsSpent: 0,
-        comment: ''
+        lastName: '',
+        firstMidName: '',
+        timeSpend: 1000,
+        iterationsSpent: 40
+
     }
     componentDidMount() {
-        if (this.props.todo) {
-            const { id, title, goal, timeSpent, iterationsSpent, comment } = this.props.todo
-            this.setState({ id, title, goal, timeSpent, iterationsSpent, comment });
+        if (this.props.student) {
+            const { id, lastName, firstMidName} = this.props.student
+            this.setState({ id, lastName, firstMidName});
         }
     }
     onChange = e => {
@@ -27,8 +27,8 @@ class ToDoCreationForm extends React.Component {
     submitNew = e => {
         e.preventDefault();
         var data = {
-            title: this.state.title,
-            goal: this.state.goal,
+            lastName: this.state.title,
+            firstMidName: this.state.goal,
             timeSpent: this.state.timeSpent,
             iterationsSpent: this.state.iterationsSpent,
             comment: this.state.comment

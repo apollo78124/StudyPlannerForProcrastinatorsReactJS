@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StudyPlannerForProcrastinators.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace StudyPlannerForProcrastinators
 {
@@ -28,6 +30,11 @@ namespace StudyPlannerForProcrastinators
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDbContext<StudyPlannerDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("StudyPlannerDBContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
