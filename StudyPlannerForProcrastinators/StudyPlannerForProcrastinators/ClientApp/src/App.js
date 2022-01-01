@@ -7,7 +7,7 @@ import { Counter } from './components/Counter';
 import StudyTimer from './components/StudyTimer';
 import TeachersView from './components/TeachersView';
 
-import './custom.css'
+import './css/custom.css'
 
 export default class App extends Component {
   static displayName = App.name;
