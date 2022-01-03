@@ -1,0 +1,30 @@
+﻿.home-page-v1 {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-between;
+    padding-top: 35px;
+}
+
+h4 {
+    font-weight: 100;
+}
+
+.home-page-v1 .intro {
+    width: 65%;
+}
+
+    .home-page-v1 .login {
+        width: 35%;
+        align-items: center;
+        background-color: #fff;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+        box-sizing: border-box;
+        padding: 20px 0 28px;
+        height: 281px;
+        padding-left: 19px;
+        padding-right: 19px;
+        margin-top:55px;
+    }

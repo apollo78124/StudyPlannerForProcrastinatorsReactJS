@@ -1,4 +1,8 @@
 /* Provide sufficient contrast against white background */
+body {
+    background-color: #f0f2f5;
+}
+
 .contents-wrapper {
     display: flex;
     flex-direction: column;
