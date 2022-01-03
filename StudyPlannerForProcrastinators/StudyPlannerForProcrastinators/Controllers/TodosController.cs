@@ -46,7 +46,7 @@ namespace StudyPlannerForProcrastinators.Controllers
         public async Task<IActionResult> Post([FromBody] ToDo todo)
         {
             
-            todo.StudentID = 3;
+            todo.StudentID = 5;
             _context.ToDos.Add(todo);
             _context.SaveChanges();
             return CreatedAtAction("Get", todo);
