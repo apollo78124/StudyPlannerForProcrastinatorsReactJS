@@ -1,4 +1,19 @@
 /* Provide sufficient contrast against white background */
+.contents-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.contents {
+    width: 1136px;
+}
+
+.container {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 a {
   color: #0366d6;
 }

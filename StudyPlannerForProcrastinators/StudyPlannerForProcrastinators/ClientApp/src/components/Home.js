@@ -9,7 +9,7 @@ export class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div class="home-page-v1">
                 <Row>
                     <Col>
                         <Form onSubmit={this.loginUser}>
