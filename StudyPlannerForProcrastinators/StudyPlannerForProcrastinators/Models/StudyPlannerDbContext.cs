@@ -16,6 +16,8 @@ namespace StudyPlannerForProcrastinators.Models
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<StudentCredential> StudentCredentials { get; set; }
+        public DbSet<TeacherCredential> TeacherCredentials { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -46,7 +46,7 @@ namespace StudyPlannerForProcrastinators.Controllers
         public async Task<IActionResult> Post([FromBody] Student student)
         {
 
-            student.TeacherID = 1;
+            student.TeacherFk = 1;
             _context.Students.Add(student);
             _context.SaveChanges();
             return CreatedAtAction("Get", student);
@@ -66,7 +66,7 @@ namespace StudyPlannerForProcrastinators.Controllers
             {
                 existingStudent.LastName = student.LastName;
                 existingStudent.FirstMidName = student.FirstMidName;
-                existingStudent.TeacherID = 1;
+                existingStudent.TeacherFk = 1;
                 _context.SaveChanges();
             }
             else

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StudyPlannerForProcrastinators.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace StudyPlannerForProcrastinators
 {
@@ -32,8 +33,10 @@ namespace StudyPlannerForProcrastinators
             });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddRazorPages();
             services.AddDbContext<StudyPlannerDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("StudyPlannerDBContext")));
+
 
         }
 
