@@ -1,4 +1,8 @@
-﻿a.navbar-brand {
+﻿.navbar-v1 {
+    background-color: #fff;
+}
+
+a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
