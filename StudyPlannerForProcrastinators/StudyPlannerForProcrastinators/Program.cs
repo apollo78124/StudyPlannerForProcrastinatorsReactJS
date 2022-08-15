@@ -38,9 +38,11 @@ namespace StudyPlannerForProcrastinators
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
+                {   
                     webBuilder.UseStartup<Startup>();
+
                 });
+
         private static void CreateDbIfNotExists(IHost host)
         {
             using (var scope = host.Services.CreateScope())
