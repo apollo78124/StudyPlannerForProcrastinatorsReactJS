@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
 import '../css/home.css';
+import LoginForm from './form/LoginForm';
 
 export class Home extends Component {
     static displayName = Home.name;
 
-    loginUser = e => {
+    loginUser(e) {
+        debugger;
+        console.log("hi");
     }
 
     render() {
@@ -21,21 +24,8 @@ export class Home extends Component {
                             <li><strong>Project / Assignment / Course Progress Report</strong>  <br /> As you keep using the timer, SPFP will keep track of how much time you spent on studying.  <br /> You can view your progress on courses, projects, and assignments.</li> <br />
                             <li><strong>Connect</strong> <br /> SPFP provides a community where you can connect with people in your own school. <br /> Sign up now and share tips and reviews on courses, profs, buildings. </li>
                         </ul>
-                    </div>
-                    <div class="login">
-                        <Form onSubmit={this.loginUser}>
-                            <FormGroup>
-                                <Label for="username">Username:</Label>
-                                <Input type="text" name="username" />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="password">Password</Label>
-                                <Input type="password" name="password" />
-                            </FormGroup>
-                            <Button>Login</Button>
-                        </Form>
-                        <br />
-                    </div>
+                </div>
+                <LoginForm />
             </div>
         );
     }
