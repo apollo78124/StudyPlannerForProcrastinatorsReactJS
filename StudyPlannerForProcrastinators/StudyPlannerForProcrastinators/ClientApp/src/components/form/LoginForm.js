@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { TODO_API_URL } from '../../constants';
+import { LOGIN_API_URL } from '../../constants';
 class LoginForm extends React.Component {
     state = {
         username: '',
@@ -12,14 +12,13 @@ class LoginForm extends React.Component {
     }
 
     logInUser = e => {
-        e.preventDefault();
         var data = {
             username: this.state.username,
             password: this.state.password
         };
         const dataInJson = JSON.stringify(data);
         
-        fetch(`${TODO_API_URL}`, {
+        fetch(`${LOGIN_API_URL}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -27,25 +26,21 @@ class LoginForm extends React.Component {
             body: dataInJson
         })
             .then(res => res.json())
-            .then(todo => {
-                this.props.addToDoToState(todo);
-                this.props.toggle();
-            })
             .catch(err => console.log(err));
     }
 
     render() {
-        return <div class="login">
+        return <div className="login">
                     <Form onSubmit={this.logInUser}>
                         <FormGroup>
                             <Label for="username">Username:</Label>
-                            <Input type="text" name="username" />
+                            <Input type="text" name="username" onChange={this.onChange}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="password">Password</Label>
-                            <Input type="password" name="password" />
+                            <Input type="password" name="password" onChange={this.onChange}/>
                         </FormGroup>
-                        <Button>Login</Button>
+                        <Button className="login-button" type="button" onClick={() => this.logInUser()}>Login</Button>
                     </Form>
                     <br />
                 </div>

@@ -13,8 +13,8 @@ export class Home extends Component {
 
     render() {
         return (
-            <div class="home-page-v1">
-                    <div class="intro">
+            <div className="home-page-v1">
+                    <div className="intro">
                         <h1>Hello, Procrastinators!</h1>
                     <h4>Welcome to StudyPlannerForProcrastinators aka SPFP.<br />We will try to stop you from procrastinating.</h4>
                     <br />
